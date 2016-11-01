@@ -1,0 +1,35 @@
+{
+  "properties": [
+    {
+      "name": "http.client.request-connect-timeout",
+      "type": "java.lang.String",
+      "description": "Description for http.client.request-connect-timeout."
+    },
+    {
+      "name": "http.client.connection-manager-default-max-per-route",
+      "type": "java.lang.String",
+      "description": "Description for http.client.connection-manager-default-max-per-route."
+    },
+    {
+      "name": "http.client.connection-manager-max-total",
+      "type": "java.lang.String",
+      "description": "Description for http.client.connection-manager-max-total."
+    },
+    {
+      "name": "http.client.request-read-timeout",
+      "type": "java.lang.String",
+      "description": "Description for http.client.request-read-timeout."
+    },
+    {
+      "name": "default-test-server-url",
+      "type": "java.lang.String",
+      "sourceType": "com.qianmi.tda.exec.DubboTestRunner",
+      "description": "Description for default-test-server-url."
+    },
+    {
+      "name": "test-case-file-regex",
+      "type": "java.lang.String",
+      "description": "Description for test-case-file-regex."
+    }
+  ]
+}
