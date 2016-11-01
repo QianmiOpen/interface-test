@@ -52,7 +52,7 @@
 
 
 完整TestSuit示例：
-```
+```js
 {
   "dubboServiceURL": "dubbo://172.19.65.199:20880",
   "execOrder": 1,
