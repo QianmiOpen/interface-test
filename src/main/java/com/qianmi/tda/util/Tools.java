@@ -36,6 +36,13 @@ public final class Tools {
     /**
      * 日期格式化成字符串
      */
+    public static String formatDateToFileSuffix(Date date) {
+        return new SimpleDateFormat("yyyyMMdd_HHmmssSSS").format(date);
+    }
+
+    /**
+     * 日期格式化成字符串
+     */
     public static String formatDateTimeMills(Date date) {
         return new SimpleDateFormat(DATE_TIME_MILLS_PATTERN).format(date);
     }

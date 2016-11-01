@@ -51,7 +51,7 @@ public class HtmlReportGenerator {
 
         log.debug("生成报告参数:{}", params);
 
-        String htmlReportPath = String.format("%s/html-report-%s.html", testSuitHome.getPath(), Tools.formatDateTime(new Date()));
+        String htmlReportPath = String.format("%s/html-report-%s.html", testSuitHome.getPath(), Tools.formatDateToFileSuffix(new Date()));
         Writer htmlWriter = new FileWriter(htmlReportPath);
         try {
             htmlTemplate.process(params, htmlWriter);

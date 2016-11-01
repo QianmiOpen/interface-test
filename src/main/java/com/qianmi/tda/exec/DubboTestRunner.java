@@ -21,6 +21,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -89,9 +90,16 @@ public class DubboTestRunner {
                             String path = expect.getPath();
                             String operator = expect.getOperator();
                             Object expectValue = expect.getValue();
-                            Object actualValue = json.read(path.replaceFirst("\\$", "\\$.msg"));
+                            Object actualObj = null;
+                            String actualValue = json.read(path.replaceFirst("\\$", "\\$.msg"), String.class);
+                            try {
+                                actualObj = objectMapper.readValue(actualValue, Object.class);
+                            } catch (IOException e) {
+                                log.debug("转换接口执行结果失败, exMsg:{}", e.getMessage());
+                                actualObj = actualValue;
+                            }
 
-                            if (EvalUtil.eval(expectValue, actualValue, operator)) {
+                            if (EvalUtil.eval(expectValue, actualObj, operator)) {
                                 return null;
                             } else {
                                 try {
