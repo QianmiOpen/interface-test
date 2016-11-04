@@ -3,6 +3,7 @@ package com.qianmi.tda.exec;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.DocumentContext;
+import com.jayway.jsonpath.InvalidJsonException;
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.spi.mapper.MappingException;
 import com.qianmi.tda.bean.AggTestResult;
@@ -23,7 +24,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -93,22 +95,27 @@ public class DubboTestRunner {
                             String operator = expect.getOperator();
                             Object expectValue = expect.getValue();
                             Object actualObj = null;
-                            String actualValue = json.read(path.replaceFirst("\\$", "\\$.msg"), String.class);
+
+                            DocumentContext result = null;
                             try {
-                                actualObj = objectMapper.readValue(actualValue, Object.class);
-                            } catch (IOException e) {
+                                result = JsonPath.parse(msg);
+                                actualObj = result.read(path, Object.class);
+                            } catch (InvalidJsonException e) {
+                                // 如果解析失败，说明返回结果不是一个合法的json对象
+                                actualObj = msg;
+                            } catch (Exception e) {
                                 log.debug("转换接口执行结果失败, exMsg:{}", e.getMessage());
-                                actualObj = actualValue;
+                                actualObj = msg;
                             }
 
                             if (EvalUtil.eval(expectValue, actualObj, operator)) {
                                 return null;
                             } else {
                                 try {
-                                    return new TestResult.FailMsg(actualValue == null ? "null" : objectMapper.writeValueAsString(actualValue),
+                                    return new TestResult.FailMsg(actualObj == null ? "null" : objectMapper.writeValueAsString(actualObj),
                                             expectValue == null ? "null" : objectMapper.writeValueAsString(expectValue), operator);
                                 } catch (JsonProcessingException e) {
-                                    log.debug("json转换异常，actualValue:{}, expectValue:{}", actualValue, expectValue);
+                                    log.debug("json转换异常，actualValue:{}, expectValue:{}", actualObj, expectValue);
                                     return new TestResult.FailMsg(String.valueOf(objectMapper), String.valueOf(expectValue), operator);
                                 }
                             }
@@ -137,7 +144,7 @@ public class DubboTestRunner {
 
         } catch (MappingException ex) {
             testResult.setStatus(TestResult.ERROR);
-            testResult.setException("根据'{}'无法到获取值");
+            testResult.setException("无法到获取值; " + Tools.getStackTrace(ex));
         } catch (JsonProcessingException e) {
             log.info("解析参数失败. testSuit: {}, testCase:{}", methodName, testCase, e);
             testResult.setStatus(TestResult.ERROR);
