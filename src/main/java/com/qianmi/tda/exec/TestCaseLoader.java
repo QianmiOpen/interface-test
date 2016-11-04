@@ -1,4 +1,4 @@
-package com.qianmi.tda;
+package com.qianmi.tda.exec;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
@@ -33,14 +33,13 @@ public class TestCaseLoader {
     @Setter
     private File testSuitHome;
 
-
     /**
      * 加载测试
      */
     public List<TestSuit> load() {
 
         if (testSuitHome == null || !testSuitHome.exists() || !testSuitHome.isDirectory()) {
-            log.info("'{}'不存在或不是一个目录", testSuitHome);
+            log.warn("'{}'不存在或不是一个目录", testSuitHome);
             return Collections.emptyList();
         }
         List<File> testSuitsFiles = new ArrayList<>();

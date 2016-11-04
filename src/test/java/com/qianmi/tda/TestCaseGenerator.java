@@ -272,6 +272,7 @@ public class TestCaseGenerator implements CommandLineRunner {
 
                         Map<String, Object> suitMap = new TreeMap<>();
                         suitMap.put("execOrder", 1);
+                        suitMap.put("intfName", intf);
                         suitMap.put("testServerURL", null);
                         suitMap.put("dubboServiceURL", "dubbo://172.19.65.199:20880");
                         suitMap.put("execOrder", 1);

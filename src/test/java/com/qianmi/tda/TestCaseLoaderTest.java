@@ -6,6 +6,7 @@ import com.jayway.jsonpath.spi.json.JsonProvider;
 import com.jayway.jsonpath.spi.mapper.JacksonMappingProvider;
 import com.jayway.jsonpath.spi.mapper.MappingProvider;
 import com.qianmi.tda.bean.TestSuit;
+import com.qianmi.tda.exec.TestCaseLoader;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -1,35 +1,61 @@
 {
+  "groups": [{
+    "name": "http.client",
+    "type": "com.qianmi.tda.config.HttpClientConfiguration",
+    "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
+  }],
   "properties": [
     {
       "name": "http.client.request-connect-timeout",
-      "type": "java.lang.String",
-      "description": "Description for http.client.request-connect-timeout."
+      "type": "java.lang.Long",
+      "defaultValue": 2000,
+      "description": "http链接超时时间ms.",
+      "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
     },
     {
       "name": "http.client.connection-manager-default-max-per-route",
-      "type": "java.lang.String",
-      "description": "Description for http.client.connection-manager-default-max-per-route."
+      "type": "java.lang.Long",
+      "defaultValue": 1000,
+      "description": "Description for http.client.connection-manager-default-max-per-route.",
+      "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
     },
     {
       "name": "http.client.connection-manager-max-total",
-      "type": "java.lang.String",
-      "description": "Description for http.client.connection-manager-max-total."
+      "type": "java.lang.Long",
+      "defaultValue": 1000,
+      "description": "Http最大连接数.",
+      "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
     },
     {
       "name": "http.client.request-read-timeout",
-      "type": "java.lang.String",
-      "description": "Description for http.client.request-read-timeout."
+      "type": "java.lang.Long",
+      "defaultValue": 10000,
+      "description": "Http读取数据超时时间.",
+      "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
     },
     {
       "name": "default-test-server-url",
       "type": "java.lang.String",
       "sourceType": "com.qianmi.tda.exec.DubboTestRunner",
-      "description": "Description for default-test-server-url."
+      "description": "默认待测试的服务器地址."
     },
     {
-      "name": "test-case-file-regex",
+      "name": "test-suit-home",
       "type": "java.lang.String",
-      "description": "Description for test-case-file-regex."
+      "sourceType": "com.qianmi.tda.exec.TestCaseLoader",
+      "description": "测试用例Home目录."
+    },
+    {
+      "name": "test-case-file-extension",
+      "type": "java.lang.String",
+      "sourceType": "com.qianmi.tda.exec.TestCaseLoader",
+      "description": "测试用例文件后缀."
+    },
+    {
+      "name": "test-reports-home",
+      "type": "java.lang.String",
+      "sourceType": "com.qianmi.tda.report.HtmlReportGenerator",
+      "description": "测试报告Home目录."
     }
   ]
 }

@@ -11,6 +11,7 @@ import com.qianmi.tda.bean.TestResult;
 import com.qianmi.tda.bean.TestSuit;
 import com.qianmi.tda.util.EvalUtil;
 import com.qianmi.tda.util.Tools;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +41,7 @@ public class DubboTestRunner {
     private ObjectMapper objectMapper;
 
     @Value("${default-test-server-url:http://127.0.0.1:8080/executeTest.do}")
+    @Setter
     private String defaultTestServerUrl;
 
     public AggTestResult run(TestSuit testSuit) {

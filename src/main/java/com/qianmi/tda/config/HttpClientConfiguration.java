@@ -1,5 +1,6 @@
 package com.qianmi.tda.config;
 
+import lombok.Setter;
 import org.apache.http.client.HttpClient;
 import org.apache.http.conn.HttpClientConnectionManager;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -22,17 +23,20 @@ public class HttpClientConfiguration {
      * 整个连接池的并发最大数
      */
     @Value("${http.client.connection-manager-max-total:1000}")
+    @Setter
     private int connectionManagerMaxTotal = 1000;
 
     /**
      * 每个主机的并发最大数
      */
     @Value("${http.client.connection-manager-default-max-per-route:1000}")
+    @Setter
     private int connectionManagerDefaultMaxPerRoute = 1000;
 
     /**
      * Request连接超时时间，单位毫秒；
      */
+    @Setter
     @Value("${http.client.request-connect-timeout:2000}")
     private int requestConnectTimeout = 2000;
 
@@ -40,6 +44,7 @@ public class HttpClientConfiguration {
      * Request读取响应结果超时时间，单位毫秒
      */
     @Value("${http.client.request-read-timeout:10000}")
+    @Setter
     private int requestReadTimeout = 10000;
 
     @Bean(name = "defaultHttpClientConnectionManager")

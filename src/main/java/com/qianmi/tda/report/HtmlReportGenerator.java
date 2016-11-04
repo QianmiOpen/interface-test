@@ -4,6 +4,7 @@ import com.qianmi.tda.bean.AggTestResult;
 import com.qianmi.tda.util.Tools;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +14,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -26,13 +29,14 @@ import java.util.Map;
 @Slf4j
 public class HtmlReportGenerator {
 
-    @Value("${test-suit-home:${user.dir}/testcase}")
-    private File testSuitHome;
+    @Value("${test-reports-home:${user.dir}/reports}")
+    @Setter
+    private File testReportsHome;
 
     @Autowired
     private Template htmlTemplate;
 
-    public void generate(String reportTitle, List<AggTestResult> aggTestResultList) throws IOException {
+    public String generate(String reportTitle, List<AggTestResult> aggTestResultList) throws IOException {
         long totalCases = aggTestResultList.stream().mapToLong(AggTestResult::getTotal).sum();
         long passedCases = aggTestResultList.stream().mapToLong(AggTestResult::getPassed).sum();
         long errorCases = aggTestResultList.stream().mapToLong(AggTestResult::getErrors).sum();
@@ -51,13 +55,17 @@ public class HtmlReportGenerator {
 
         log.debug("生成报告参数:{}", params);
 
-        String htmlReportPath = String.format("%s/html-report-%s.html", testSuitHome.getPath(), Tools.formatDateToFileSuffix(new Date()));
+        if (!testReportsHome.exists()) {
+            Files.createDirectories(Paths.get(testReportsHome.getPath()));
+        }
+
+        String htmlReportPath = String.format("%s/html-report-%s.html", testReportsHome.getPath(), Tools.formatDateToFileSuffix(new Date()));
         Writer htmlWriter = new FileWriter(htmlReportPath);
         try {
             htmlTemplate.process(params, htmlWriter);
         } catch (TemplateException e) {
             log.error("生成html报告失败, 模板处理异常", e);
         }
-
+        return htmlReportPath;
     }
 }
