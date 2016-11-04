@@ -75,25 +75,6 @@
         </plugins>
     </build>
 
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>qianmi-snapshots</id>-->
-            <!--<intfName>intranet public snapshots</intfName>-->
-            <!--<url>http://nexus.dev.qianmi.com/nexus/content/repositories/snapshots</url>-->
-            <!--<snapshots>-->
-                <!--<updatePolicy>always</updatePolicy>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-
-        <!--<repository>-->
-            <!--<id>central</id>-->
-            <!--<url>http://nexus.dev.qianmi.com/nexus/content/groups/public</url>-->
-            <!--<snapshots>-->
-                <!--<enabled>false</enabled>-->
-            <!--</snapshots>-->
-        <!--</repository>-->
-    <!--</repositories>-->
-
     <pluginRepositories>
         <pluginRepository>
             <id>spring-releases</id>
@@ -104,4 +85,24 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
+
+    <scm>
+        <connection>scm:git:git@git.dev.qianmi.com:tda/interface-test.git</connection>
+        <developerConnection>scm:git:git@git.dev.qianmi.com:tda/interface-test.git</developerConnection>
+        <url>http://git.dev.qianmi.com/tda/interface-test.git</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>qianmi-releases</id>
+            <name>releases</name>
+            <url>http://nexus.dev.qianmi.com/nexus/content/repositories/releases</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>qianmi-snapshots</id>
+            <name>snapshots</name>
+            <url>http://nexus.dev.qianmi.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
