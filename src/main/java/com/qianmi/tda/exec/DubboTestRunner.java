@@ -105,7 +105,11 @@ public class DubboTestRunner {
                                 actualObj = msg;
                             } catch (Exception e) {
                                 log.debug("转换接口执行结果失败, exMsg:{}", e.getMessage());
-                                actualObj = msg;
+                                try {
+                                    actualObj = objectMapper.readValue(msg, Object.class);
+                                } catch (IOException e1) {
+                                    actualObj = msg;
+                                }
                             }
 
                             if (EvalUtil.eval(expectValue, actualObj, operator)) {
