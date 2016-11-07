@@ -60,6 +60,7 @@ public class TestCaseLoader {
                 String testSuitFilePath = testSuitFile.getPath();
                 String defaultSuitName = testSuitFilePath.substring(0, testSuitFilePath.lastIndexOf(testCaseFileExtension))
                         .replaceFirst(testSuitHomePath + FILE_SEPARATOR, "")
+                        .replaceAll("#", ":")
                         .replaceAll(FILE_SEPARATOR, ".");
 
                 testSuit.setIntfName(defaultSuitName);

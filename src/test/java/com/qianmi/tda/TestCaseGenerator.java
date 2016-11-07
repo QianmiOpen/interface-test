@@ -223,7 +223,7 @@ public class TestCaseGenerator implements CommandLineRunner {
 
             @SuppressWarnings("ReplaceAllDot")
             String dirPath = generateFilePath + FILE_SEPARATOR + packageName.replaceAll("\\.", FILE_SEPARATOR);
-            String fileName = dirPath + FILE_SEPARATOR + className + ":" + version + "@" + methodName + ".ts.json";
+            String fileName = dirPath + FILE_SEPARATOR + className + "#" + version + "@" + methodName + ".ts.json";
 
             // 如果文件已存在，并且没开启覆盖则忽略
             if (!isOverrideTestCase && new File(fileName).exists()) {
