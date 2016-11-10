@@ -17,6 +17,7 @@ public class TestCase {
 
     private List<Expect> expects = new ArrayList<>();
 
+    @SuppressWarnings("WeakerAccess")
     @Data
     public static class Expect {
         private String path;

@@ -1,9 +1,11 @@
 {
-  "groups": [{
-    "name": "http.client",
-    "type": "com.qianmi.tda.config.HttpClientConfiguration",
-    "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
-  }],
+  "groups": [
+    {
+      "name": "http.client",
+      "type": "com.qianmi.tda.config.HttpClientConfiguration",
+      "sourceType": "com.qianmi.tda.config.HttpClientConfiguration"
+    }
+  ],
   "properties": [
     {
       "name": "http.client.request-connect-timeout",
@@ -36,25 +38,35 @@
     {
       "name": "default-test-server-url",
       "type": "java.lang.String",
-      "sourceType": "com.qianmi.tda.exec.DubboTestRunner",
+      "sourceType": "com.qianmi.tda.exec.DubboExecutor",
       "description": "默认待测试的服务器地址."
     },
     {
       "name": "test-suit-home",
       "type": "java.lang.String",
       "sourceType": "com.qianmi.tda.exec.TestCaseLoader",
+      "defaultValue": "${user.dir}/testcase",
       "description": "测试用例Home目录."
     },
     {
-      "name": "test-case-file-extension",
+      "name": "test-case-file-extensions",
+      "type": "java.lang.String[]",
+      "sourceType": "com.qianmi.tda.exec.TestCaseLoader",
+      "defaultValue": ".ts.json, .ts.js",
+      "description": "测试用例文件后缀."
+    },
+    {
+      "name": "test-suit-variable-name-in-js",
       "type": "java.lang.String",
       "sourceType": "com.qianmi.tda.exec.TestCaseLoader",
-      "description": "测试用例文件后缀."
+      "defaultValue": "testSuit",
+      "description": "测试套在JS文件中的变量名."
     },
     {
       "name": "test-reports-home",
       "type": "java.lang.String",
       "sourceType": "com.qianmi.tda.report.HtmlReportGenerator",
+      "defaultValue": "${user.dir}/reports",
       "description": "测试报告Home目录."
     }
   ]

@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -39,6 +38,7 @@ public class TestResult {
         this.exception = exception;
     }
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private List<FailMsg> failMsgList = new ArrayList<>();
 
     public TestResult addFailMsgs(List<FailMsg>failMsgs){

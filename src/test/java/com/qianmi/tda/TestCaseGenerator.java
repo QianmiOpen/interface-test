@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.*;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -28,6 +29,7 @@ import java.util.*;
  */
 @SuppressWarnings({"FieldCanBeLocal", "SpringFacetCodeInspection", "ConstantConditions"})
 @SpringBootApplication
+@ComponentScan("com.qianmi.tda.config")
 public class TestCaseGenerator implements CommandLineRunner {
     private static final String FILE_SEPARATOR = System.getProperty("file.separator");
 

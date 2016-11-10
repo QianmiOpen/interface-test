@@ -30,6 +30,7 @@ import java.util.stream.Collectors;
  * InterfaceTestApplication
  * Created by aqlu on 2016/10/28.
  */
+@SuppressWarnings("SpringFacetCodeInspection")
 @SpringBootApplication
 @Slf4j
 public class InterfaceTestApplication implements InitializingBean, CommandLineRunner{

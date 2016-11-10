@@ -36,7 +36,7 @@
 {
   "dubboServiceURL": "dubbo://172.19.65.199:20880",
   "execOrder": 1,
-  "name": "com.qianmi.pc.api.app.AppProductProvider:1.0.0@addFromOwner",
+  "intfName": "com.qianmi.pc.api.app.AppProductProvider:1.0.0@addFromOwner",
   "testCases": [{}],
   "testServerURL": null
 }
@@ -49,6 +49,8 @@
 | intfName           |String    | 待测接口名，不填写时将根据文件名猜测                                    |
 | testCases          |TestCase[]| 测试用例数组，参见[TestCase](#TestCase)                               |
 | testServerURL      |String    | 测试目标服务器地址，测试dubbo接口时，此处配置[Edge](https://github.com/qianmiopen/edge)服务器代理地址           |
+
+> intfName为空时，系统会根绝文件路径与文件名进行猜测。例如：在%TEST_SUIT_HOME%目录下放置"com/qianmi/pc/api/app/AppProductProvider#1.0.0@addFromOwner.ts.json"文件，intfName将会自动猜测为："com.qianmi.pc.api.app.AppProductProvider:1.0.0@addFromOwner"
 
 
 完整TestSuit示例：

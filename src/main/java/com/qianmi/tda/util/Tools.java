@@ -11,6 +11,7 @@ import java.util.Date;
  * Tools
  * Created by aqlu on 2016/10/28.
  */
+@SuppressWarnings("unused")
 public final class Tools {
 
     private static String DATE_PATTERN = "yyyy-MM-dd";
