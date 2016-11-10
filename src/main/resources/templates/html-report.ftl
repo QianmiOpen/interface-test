@@ -652,9 +652,9 @@ eval(function (p, a, c, k, e, r) {
             <div class="time">Cost: ${reportTotalCost} ms</div>
             <strong>
                 <span class="total"> total: ${reportTotalCases}, </span>
-                <span class="passed">passed: ${reportPassedCases}, </span>
-                <span class="failed">failed: ${reportFailedCases}, </span>
-                <span class="error">error: ${reportErrorCases} </span>
+                <#if reportPassedCases gt 0 ><span class="passed">passed: ${reportPassedCases}, </span></#if>
+                <#if reportFailedCases gt 0 ><span class="failed">failed: ${reportFailedCases}, </span></#if>
+                <#if reportErrorCases gt 0 ><span class="error">error: ${reportErrorCases} </span></#if>
             </strong>
         </h3>
         <div id="treecontrol">
@@ -674,21 +674,27 @@ eval(function (p, a, c, k, e, r) {
                 <li xmlns="" class="level top ${aggTestResult.status}">
                 <span>
                     <em class="time"><div class="time"><span>cost: ${aggTestResult.totalTime} ms</span></div></em>
+                    <#if aggTestResult.errors gt 0 >
                     <em class="stat">
                         <div class="stat">
                             <span class="error">error: ${aggTestResult.errors}</span>
                         </div>
                     </em>
+                    </#if>
+                    <#if aggTestResult.failures gt 0 >
                     <em class="stat">
                         <div class="stat">
                             <span class="failed">failed: ${aggTestResult.failures}, </span>
                         </div>
                     </em>
+                    </#if>
+                    <#if aggTestResult.passed gt 0 >
                     <em class="stat">
                         <div class="stat">
                             <span class="passed">passed: ${aggTestResult.passed}, </span>
                         </div>
                     </em>
+                    </#if>
                     <em class="stat">
                         <div class="stat">
                             <span class="total">total: ${aggTestResult.total}, </span>
