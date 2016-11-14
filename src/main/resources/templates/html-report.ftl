@@ -654,7 +654,7 @@ eval(function (p, a, c, k, e, r) {
                 <span class="total"> total: ${reportTotalCases}, </span>
                 <#if reportPassedCases gt 0 ><span class="passed">passed: ${reportPassedCases}, </span></#if>
                 <#if reportFailedCases gt 0 ><span class="failed">failed: ${reportFailedCases}, </span></#if>
-                <#if reportErrorCases gt 0 ><span class="error">error: ${reportErrorCases} </span></#if>
+                <#if reportErrorCases gt 0 ><span class="error">error: ${reportErrorCases}, </span></#if>
             </strong>
         </h3>
         <div id="treecontrol">
@@ -677,7 +677,7 @@ eval(function (p, a, c, k, e, r) {
                     <#if aggTestResult.errors gt 0 >
                     <em class="stat">
                         <div class="stat">
-                            <span class="error">error: ${aggTestResult.errors}</span>
+                            <span class="error">error: ${aggTestResult.errors}, </span>
                         </div>
                     </em>
                     </#if>
