@@ -9,7 +9,7 @@
 
     <groupId>com.qianmi</groupId>
     <artifactId>interface-test</artifactId>
-    <version>1.0.4-RELEASE</version>
+    <version>1.0.5-SNAPSHOT</version>
 
     <properties>
         <java.version>1.8</java.version>
