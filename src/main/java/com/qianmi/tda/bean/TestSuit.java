@@ -12,6 +12,8 @@ import java.util.List;
 @Data
 public class TestSuit implements Comparable<TestSuit> {
 
+    private String name;
+
     private String intfName;
 
     private String testServerURL;

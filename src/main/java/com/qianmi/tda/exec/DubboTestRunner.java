@@ -11,6 +11,7 @@ import com.qianmi.tda.util.Tools;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 import java.util.Date;
@@ -40,7 +41,9 @@ public class DubboTestRunner {
                 .map(testCase -> run(testCase, testSuit.getTestServerURL(), intfName, dubboServiceUrl))
                 .collect(Collectors.toList());
 
-        AggTestResult aggTestResult = new AggTestResult(intfName, Tools.formatDateTimeMills(new Date()));
+        String reportName = StringUtils.hasText(testSuit.getName()) ? testSuit.getName() : intfName;
+
+        AggTestResult aggTestResult = new AggTestResult(reportName, Tools.formatDateTimeMills(new Date()));
         aggTestResult.addTestCases(testResults);
 
         return aggTestResult;
