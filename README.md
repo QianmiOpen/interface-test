@@ -1,13 +1,79 @@
 接口测试工具
 ==============
-降低接口测试难度、帮助开发人员快速测试接口。目前已支持dubbo接口测试（需要借助[Edge](https://github.com/qianmiopen/edge)将dubbo接口以http形式发布），后期可以经过简单修改就能支持rest接口测试。
+目标：降低接口测试难度、帮助开发人员快速测试接口。
+目前已支持dubbo接口测试（需要借助[Edge](https://github.com/qianmiopen/edge)将dubbo接口以http形式发布），后期可以经过简单修改就能支持rest接口测试。
+测试人员通过json、js语言编写用例文件，通过maven插件执行用例，并生成报告；
+![image](report-demo.png)
 
-
+与Edge比较
+Edge擅长的是以可视化的方式、实时的对接口进行测试，测试结果返回后需要人为的check。比较适合在开发、联调阶段使用。
+interface-test将用例以脚本的方式保存下来，通过脚本自定义check规则，程序自动判断接口测试结果，用例可以回放执行。比较适合用在服务重构后接口的兼容检查、版本上线前的接口检测。
+测试dubbo接口时，interface-test工具依赖Edge工具的测试接口。
 
 ## 使用介绍
+
+添加依赖
+```xml
+<dependencies>
+    <dependency>
+        <groupId>com.qianmi</groupId>
+        <artifactId>interface-test</artifactId>
+        <version>${version}</version>
+        <scope>runtime</scope>
+    </dependency>
+</dependencies>
+```
+指定build plugin
+```xml
+<plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>exec-maven-plugin</artifactId>
+    <version>1.5.0</version>
+    <executions>
+        <execution>
+            <id>run-testcase</id>
+            <goals>
+                <goal>java</goal>
+            </goals>
+        </execution>
+    </executions>
+    <configuration>
+        <classpathScope>runtime</classpathScope>
+        <mainClass>org.springframework.boot.loader.JarLauncher</mainClass>
+        <arguments>
+            <argument>-Dspring.config.location=${basedir}/application.properties</argument> <!--指定运行配置文件-->
+        </arguments>
+    </configuration>
+</plugin>
+```
+
+application.properties
+```properties
+logging.level.root=info
+logging.level.com.qianmi=debug
+logging.level.com.qianmi.tda.report=info
+
+## 测试用例根目录
+test-suit-home=${user.dir}/testcase/com/qianmi/pc/stock/api
+## 测试用例文件扩展名
+test-case-file-extensions=.ts.json, .ts.js
+## 测试报告根目录
+test-reports-home=${user.dir}/reports
+## 默认dubbo测试服务器地址(Edge服务地址)
+default-test-server-url=http://172.19.65.96:8080/executeTest.do
+
+http.client.connection-manager-default-max-per-route=1000
+http.client.request-connect-timeout=2000
+http.client.connection-manager-max-total=1000
+http.client.request-read-timeout=100000
+
+```
+
+使用demo: [interface-test-demo](https://github.com/qianmiopen/inderface-demo)
+
 ### 创建测试套（TestSuit）
 <span id="TestCase">TestCase模板：</span>
-```js
+```json
    {
       "name": "case1",
       "params": [],
@@ -32,7 +98,7 @@
 
 
 <span id="TestSuit">TestSuit模板：</span>
-```js
+```json
 {
   "dubboServiceURL": "dubbo://172.19.65.199:20880",
   "execOrder": 1,
@@ -54,7 +120,7 @@
 
 
 完整TestSuit示例：
-```js
+```json
 {
   "dubboServiceURL": "dubbo://172.19.65.199:20880",
   "execOrder": 1,
@@ -166,7 +232,7 @@ Path Examples
 
 Given the json
 
-```javascript
+```json
 {
     "store": {
         "book": [
