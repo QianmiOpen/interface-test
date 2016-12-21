@@ -1,14 +1,16 @@
 接口测试工具
 ==============
-目标：降低接口测试难度、帮助开发人员快速测试接口。
+[![Build Status](https://travis-ci.org/QianmiOpen/interface-test.svg?branch=master)](https://travis-ci.org/QianmiOpen/interface-test)
+
+目标：降低接口测试难度、帮助开发人员快速测试接口。<br/>
 目前已支持dubbo接口测试（需要借助[Edge](https://github.com/qianmiopen/edge)将dubbo接口以http形式发布），后期可以经过简单修改就能支持rest接口测试。
 测试人员通过json、js语言编写用例文件，通过maven插件执行用例，并生成报告；
 ![image](report-demo.png)
 
-与Edge比较
-Edge擅长的是以可视化的方式、实时的对接口进行测试，测试结果返回后需要人为的check。比较适合在开发、联调阶段使用。
-interface-test将用例以脚本的方式保存下来，通过脚本自定义check规则，程序自动判断接口测试结果，用例可以回放执行。比较适合用在服务重构后接口的兼容检查、版本上线前的接口检测。
-测试dubbo接口时，interface-test工具依赖Edge工具的测试接口。
+> 与Edge比较<br/>
+> Edge擅长的是以可视化的方式、实时的对接口进行测试，测试结果返回后需要人为的check。比较适合在开发、联调阶段使用。<br/>
+> interface-test将用例以脚本的方式保存下来，通过脚本自定义check规则，程序自动判断接口测试结果，用例可以回放执行。比较适合用在服务重构后接口的兼容检查、版本上线前的接口检测。<br/>
+> 测试dubbo接口时，interface-test工具依赖Edge工具的测试接口。<br/>
 
 ## 使用介绍
 
@@ -72,7 +74,7 @@ http.client.request-read-timeout=100000
 使用demo: [interface-test-demo](https://github.com/qianmiopen/inderface-demo)
 
 ### 创建测试套（TestSuit）
-<span id="TestCase">TestCase模板：</span>
+#### TestCase模板：
 ```json
    {
       "name": "case1",
@@ -92,12 +94,13 @@ http.client.request-read-timeout=100000
 | params             |Object[]  | 参数列表，待测接口的JSON格式                                            |
 | expects            |Expect[]  | 断言数组。|
 
-> operator: 期待值与真实值的比较操作符，支持“=、!=、<、<=、>、>=、contains、!contains、match、!match”;<br/>
-> path: 从接口返回结果取值的路径，参见[JsonPath](#JsonPath);<br/>
-> value: 期待值<br/>
+>
+ operator: 期待值与真实值的比较操作符，支持“=、!=、<、<=、>、>=、contains、!contains、match、!match”;<br/>
+ path: 从接口返回结果取值的路径，参见 [JsonPath表达式](#jsonpath表达式); <br/>
+ value: 期待值<br/>
 
 
-<span id="TestSuit">TestSuit模板：</span>
+#### TestSuit模板：
 ```json
 {
   "dubboServiceURL": "dubbo://172.19.65.199:20880",
@@ -113,7 +116,7 @@ http.client.request-read-timeout=100000
 | dubboServiceURL    |String    | dubbo服务地址，可为空，未指定时从dubbo注册中心上自动查找                 |
 | execOrder          |Number    | 测试套执行顺序，默认为1，值越小优先级越高                                |
 | intfName           |String    | 待测接口名，不填写时将根据文件名猜测                                    |
-| testCases          |TestCase[]| 测试用例数组，参见[TestCase](#TestCase)                               |
+| testCases          |TestCase[]| 测试用例数组，参见[TestCase模板](#testcase模板)                               |
 | testServerURL      |String    | 测试目标服务器地址，测试dubbo接口时，此处配置[Edge](https://github.com/qianmiopen/edge)服务器代理地址           |
 
 > intfName为空时，系统会根绝文件路径与文件名进行猜测。例如：在%TEST_SUIT_HOME%目录下放置"com/qianmi/pc/api/app/AppProductProvider#1.0.0@addFromOwner.ts.json"文件，intfName将会自动猜测为："com.qianmi.pc.api.app.AppProductProvider:1.0.0@addFromOwner"
@@ -170,7 +173,7 @@ http.client.request-read-timeout=100000
 >打开com.qianmi.tda.InterfaceTestApplication，执行main方法即可。测试报告存放在TEST_SUIT_HOME下。
 
 
-### <span id="JsonPath">[JsonPath](https://github.com/jayway/JsonPath)表达式</span>
+### [JsonPath](https://github.com/jayway/JsonPath)表达式
 JsonPath expressions can use the dot–notation
 
 `$.store.book[0].title`
