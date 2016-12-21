@@ -170,7 +170,7 @@ http.client.request-read-timeout=100000
 >打开com.qianmi.tda.InterfaceTestApplication，执行main方法即可。测试报告存放在TEST_SUIT_HOME下。
 
 
-### <span id="JsonPath">JsonPath表达式</span>
+### <span id="JsonPath">[JsonPath](https://github.com/jayway/JsonPath)表达式</span>
 JsonPath expressions can use the dot–notation
 
 `$.store.book[0].title`
