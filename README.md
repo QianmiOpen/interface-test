@@ -20,7 +20,7 @@
     <dependency>
         <groupId>com.qianmi</groupId>
         <artifactId>interface-test</artifactId>
-        <version>${version}</version>
+        <version>1.0.5-RELEASE</version>
         <scope>runtime</scope>
     </dependency>
 </dependencies>
