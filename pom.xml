@@ -9,7 +9,7 @@
 
     <groupId>com.qianmi</groupId>
     <artifactId>interface-test</artifactId>
-    <version>1.0.5-RELEASE</version>
+    <version>1.0.6-SNAPSHOT</version>
 
     <properties>
         <java.version>1.8</java.version>
@@ -105,7 +105,7 @@
     </pluginRepositories>
 
     <scm>
-        <tag>interface-test-1.0.5-RELEASE</tag>
+        <tag>master</tag>
         <connection>scm:git:git@github.com:QianmiOpen/interface-test.git</connection>
         <developerConnection>scm:git:git@github.com:QianmiOpen/interface-test.git</developerConnection>
         <url>git@github.com:QianmiOpen/interface-test.git</url>
